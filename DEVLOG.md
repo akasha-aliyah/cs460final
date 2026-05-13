@@ -2,12 +2,6 @@
 
 **Student Name:** Akasha Barron
 **Student ID:** 827977287
-
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – [5/12 - 4pm]: Initial Plan
@@ -29,16 +23,26 @@ this, so yes this is going to be all in one day but like bear with me.
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/12 - 10:30pm]: Time to Grind
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
+This is when I started the majority of my work, because I had finished all the things I needed to do and was ready to
+just sit with a cold can of Coke and really get down to it. I work best at night after I feel like I've enjoyed my day,
+eaten nutritious food, and relaxed, so I was ready to focus and get to work.
 
-_Your entry here._
+A struggle I encountered in this section was when I was building my run_dijkstra function, because when creating my 
+dictionary to save the distance between the current source node and its neighbors, I set dictionary = {0 : source},
+which would have been fine if the next line was not overriding all the nodes from our source list (select_sources) with
+the float("inf") value. I noticed when I tested this with a simple graph and kept getting an output that said inf. Any 
+new distance that I tried to calculate would stay at inf because nothing could be different (new_dist = current_dist + 
+cost). Everything literally stays completely still! It broke my distance_tbl because all nodes were considered 
+unreachable. I had to change it to initialize it first, run the loop, and then set the source to 0.
 
 ---
 
 ## Entry 3 – [Date]: [Short description]
+
+> Required. At least one entry must describe a bug, wrong assumption, or design change
+> you encountered. Describe what went wrong and how you resolved it.
 
 _Your entry here._
 
@@ -53,18 +57,16 @@ _Your entry here._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – [5/12 - Done as I went along.]: Time Estimate
 
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
-
-| Part | Estimated Hours |
-|---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part | Estimated Hours                                                                                                             |
+|---|-----------------------------------------------------------------------------------------------------------------------------|
+| Part 1: Problem Analysis | About 30 minutes because my friends were around talking to me when I was trying to read.                                    |
+| Part 2: Precomputation Design | Roughly 1 hour and a half, because I kept taking small breaks to Google other stuff (graduation prep is stressing me out!). |
+| Part 3: Algorithm Correctness |                                                                                                                             |
+| Part 4: Search Design |                                                                                                                             |
+| Part 5: State and Search Space |                                                                                                                             |
+| Part 6: Pruning |                                                                                                                             |
+| Part 7: Implementation |                                                                                                                             |
+| README and DEVLOG writing |                                                                                                                             |
+| **Total** |                                                                                                                             |

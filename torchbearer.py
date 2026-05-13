@@ -35,60 +35,40 @@ def explain_problem():
 # =============================================================================
 
 def select_sources(spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    list[node]
-        No duplicates. Order does not matter.
-
-    TODO
-    """
-    pass
+    sources = [spawn]   # starting with add spawn because we begin from there
+    for relic in relics:
+        if relic not in sources:
+            sources.append(relic)
+    # exit_node is intentionally excluded because we do not need shortest path from exit ; follows with readme
+    return sources
 
 
 def run_dijkstra(graph, source):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-        graph[u] = [(v, cost), ...]. All costs are nonnegative integers.
-    source : node
+    distance = {}      # initialize dictionary
+    for node in graph:
+        distance[node] = float("inf")   # add locations, but unknown if reachable yet
+    distance[source] = 0    # zero cost to get where we already are
 
-    Returns
-    -------
-    dict[node, float]
-        Minimum cost from source to every node in graph.
-        Unreachable nodes map to float('inf').
-
-    TODO
-    """
-    pass
+    queue = []      # priority queue ; holds all candidates for exploration
+    heapq.heappush(queue, (0, source))
+    while len(queue) > 0:         # while there are still nodes to be looked at
+        current_dist, current_node = heapq.heappop(queue)   # cheapest node to reach
+        if current_dist > distance[current_node]:   # clear out if path is more expensive than others to same node
+            continue
+        for neighbor, cost in graph[current_node]:
+            new_dist = current_dist + cost          # cost to reach neighbor from current node
+            if new_dist < distance[neighbor]:
+                distance[neighbor] = new_dist
+                heapq.heappush(queue, (new_dist, neighbor))     # schedule for further exploration
+    return distance     # list of minimum cost from current source to any other node in the graph
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    dict[node, dict[node, float]]
-        Nested structure supporting dist_table[u][v] lookups
-        for every source u your design requires.
-
-    TODO
-    """
-    pass
+    sources = select_sources(spawn, relics, exit_node)      # all possible places to start from
+    distance_tbl = {}
+    for source in sources:
+        distance_tbl[source] = run_dijkstra(graph, source)  # current source : dict of minimum distances from source
+    return distance_tbl     # look up table of distances from all possible sources
 
 
 # =============================================================================

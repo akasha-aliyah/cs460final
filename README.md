@@ -32,33 +32,30 @@ to search over entire orders.
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
-| Source Node Type | Why it is a source |
-|---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Source Node Type  | Why it is a source                                                                         |
+|-------------------|--------------------------------------------------------------------------------------------|
+| Spawn Node (S)    | We must start at the spawn node, and from there we compute each initial travel cost.       |
+| Relic Nodes (R_i) | All subsequent travel costs are calculated here, from relic to relic and then to the exit. |
 
 ### Part 2b: Distance Storage
 
-> Fill in the table. No prose required.
-
-| Property | Your answer |
-|---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Property | Your answer                                                             |
+|---|-------------------------------------------------------------------------|
+| Data structure name | dictionary of dictionaries : distance_tbl                               |
+| What the keys represent | outer key : source node ; inner key : destination node                  |
+| What the values represent | minimum amount of fuel needed to get from current source to destination |
+| Lookup time complexity | O(1)                                                                    |
+| Why O(1) lookup is possible | dictionary hashing gives us constant-time access to stored distances    |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** k + 1
+- **Cost per run:** O(m log(n))
+- **Total complexity:** O((k + 1)m log(n))
+- **Justification (one line):** The cost of a run is given to us, and we have to run it k + 1 times, once for S and once
+for each of the k relics.
 
 ---
 

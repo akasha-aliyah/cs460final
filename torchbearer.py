@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Akasha Barron
+Student ID:   827977287
 
 INSTRUCTIONS
 ------------
@@ -25,17 +25,10 @@ import heapq
 # =============================================================================
 
 def explain_problem():
-    """
-    Returns
-    -------
-    str
-        Your Part 1 README answers, written as a string.
-        Must match what you wrote in README Part 1.
-
-    TODO
-    """
-    return "TODO"
-
+    answer1 = "A single shortest-path run from S is not enough to solve this because it would only consider the immediate cheapest path, which could ignore the fact that the next step after that could be incredibly expensive. It only compares the immediate step, not the entire sequence of required nodes that end at T."
+    answer2 = "After considering all the inter-location costs, the decision to make it how to connect all the costs into one overall lower costs that visits every relic chamber and ends at T."
+    answer3 = "We start by knowing the shortest travel costs, but different orders produce different total costs, which is why we need to search over entire orders."
+    return answer1 + " " + answer2 + " " + answer3
 
 # =============================================================================
 # PART 2

@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Akasha Barron
+**Student ID:** 827977287
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -13,17 +13,18 @@
 
 ## Part 1: Problem Analysis
 
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
-
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+A single shortest-path run from S is not enough to solve this because it would only consider the immediate cheapest path,
+which could ignore the fact that the next step after that could be incredibly expensive. It only compares the immediate
+step, not the entire sequence of required nodes that end at T.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+After considering all the inter-location costs, the decision to make it how to connect all the costs into one overall
+lower costs that visits every relic chamber and ends at T.
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+We start by knowing the shortest travel costs, but different orders produce different total costs, which is why we need
+to search over entire orders.
 
 ---
 

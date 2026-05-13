@@ -1,7 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Akasha Barron
+**Student ID:** 827977287
 
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
@@ -10,12 +10,22 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [5/12 - 4pm]: Initial Plan
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
+I am writing this as I have just created my github repository. Looking over the assignment, this seems like a fun one! 
+I like the creativity that was put into spicing up the questions just for our amusement. First, I needed to read
+everything like four times because having this assignment split into three separate files that have different pieces of
+the same question took me a second to make sure I understood everything.
 
-_Your entry here._
+The hardest thing that I think I'm going to struggle with is the pruning part of this, because the limited amount of
+fuel doesn't allow for any backtracking. That makes unreachable routes so much more difficult, because of the inability 
+to fix a mistake. I am going to start largely in order because I think that it's laid out nicely for students to tackle,
+but I think I'll do run_dijkstra first and make everything else around those ideas. I'll test this with really simple 
+graphs to just make sure it works so that I'm not stuck misunderstanding what the errors are.
+
+Just so that the grader knows, I did do this entire project in basically one go besides some eating and sleeping, so the
+dates on these entry logs are going to be pretty much all the same. That's why I'm also leaving the hour that I'm doing 
+this, so yes this is going to be all in one day but like bear with me.
 
 ---
 

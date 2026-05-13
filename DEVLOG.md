@@ -55,7 +55,7 @@ take off points for this.
 It is during question 3 that I realized how to make `these little boxes`, which is sick! I feel like I am way too deep
 into my academic career to have just learned this.
 
-It is about 1 am right now, and I am getting lazy, but I don't want to do this tomorrow so I'm at least finishing
+It is about 1 am right now, and I am getting lazy, but I don't want to do this tomorrow, so I'm at least finishing
 question 6 me thinks. I am going to do an extra commit real quick just because I am slightly scared of losing progress.
 
 Also, if you are wondering how to fall into a locked-in trance and really get into the zone, the answer comes from going
@@ -67,12 +67,18 @@ have to eat food and stuff. But at least I got to part 6 before I called it quit
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [5/13 - Committed 12:15pm]: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
+Good morning, grader! After a good night's rest we are back to working, and I am going to be going until this is
+actually completed.
 
-_Your entry here._
+Given more time, I would have loved to be able to create a visual representation of the graph that we are trying to
+traverse, like the visual example given in assignment. I feel like it just gives a much clearer visual for whoever is
+trying to traverse, which would help them to feel more confident when it comes to knowing their answer is correct. To
+actually improve the code, though, I would have wanted to figure out a way to implement a much stronger lower bound,
+because larger graphs would be done so much faster with more pruning (which we didn't really need here because our 
+graphs were so small). Also, covering more edge cases (unreachable relics, repeated equal-cost paths, etc.) would
+definitely improve a larger version of this project.
 
 ---
 
@@ -82,10 +88,10 @@ _Your entry here._
 |---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Part 1: Problem Analysis | About 30 minutes because my friends were around talking to me when I was trying to read.                                                                                                                                |
 | Part 2: Precomputation Design | Roughly 1 hour and a half, because I kept taking small breaks to Google other stuff (graduation prep is stressing me out!).                                                                                             |
-| Part 3: Algorithm Correctness | 30 minutes? I take a lot of time to do anything, I feel like. I stop to do other things quite a bit (I stopped to online shop this time, so technically less than 30).                                                  |
+| Part 3: Algorithm Correctness | 30 minutes? I take a lot of time to do anything, I feel like. I stop to do other things quite a bit (I stopped to online shop for shorts real quick, so technically less than 30).                                      |
 | Part 4: Search Design | 20 minutes, because I was actually locked in and I have practice with greedy explanations from this exact class.                                                                                                        |
-| Part 5: State and Search Space | I started this strong by taking a FaceTime call, but overall time doing this was, I think around an hour.                                                                                                               |
-| Part 6: Pruning |                                                                                                                                                                                                                         |
-| Part 7: Implementation |                                                                                                                                                                                                                         |
+| Part 5: State and Search Space | I started this strong by taking a FaceTime call, but overall time doing this was, I think, around an hour.                                                                                                              |
+| Part 6: Pruning | 45 minutes? I think this piece was fairly easy to figure out.                                                                                                                                                           |
+| Part 7: Implementation | Like five minutes, after thinking through it I just wrote two pieces of code and I passed the tests, so I hope it was correct.                                                                                          |
 | README and DEVLOG writing | Honestly I don't know? I actually included the README times as part of the times above because I did the parts in tandem, so I would add like 30 minutes for DEVLOG writing but I think all the README time is covered. |
-| **Total** |                                                                                                                                                                                                                         |
+| **Total** | I think like 6 hours of sitting at my computer, if I recall correctly.                                                                                                                                                  |

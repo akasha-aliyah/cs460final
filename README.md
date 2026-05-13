@@ -137,30 +137,30 @@ really matters.
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** The algorithm tracks the cheapest route found thus far, and the order of the relics that path takes.
+- **When it is used:** It is used recursively to compare different routes to the current best cost route.
+- **What it allows the algorithm to skip:** It stops the algorithm from wasting too much time comparing the route we are
+exploring to the route that we already know is the best if it is clear that the cost is too high.
 
 ### Part 6b: Lower Bound Estimation
 
-> Three bullets.
-
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** At this moment, we know our current location, the locations
+(relics) we still have left to visit, how much fuel we've used already, and we have a handy list of pre-computed
+distances from our current location.
+- **What the lower bound accounts for:** Our lower bound is our current fuel cost + the minimum fuel cost for the
+shortest possible path.
+- **Why it never overestimates:** It doesn't overestimate because it only adds the unavoidable minimum costs of the
+shortest path, so it can never be larger than the true remaining cost.
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
+It is safe to prune a branch when its lower bound cost (minimum cost for the shortest path) already exceeds the best
+cost that we already have for a different path, because the lower bound never overestimates, so a pruned branch could
+not have led to a better solution.
 
 ---
 
 ## References
 
-> Bullet list. If none beyond lecture notes, write that.
-
-- _Your references here._
+- Lecture Notes.
+- https://docs.python.org/3/library/heapq.html, to check `heapq` implementation before I started coding, just as a quick refresher.

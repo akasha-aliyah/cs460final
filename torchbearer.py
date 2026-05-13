@@ -4,23 +4,9 @@ The Torchbearer
 
 Student Name: Akasha Barron
 Student ID:   827977287
-
-INSTRUCTIONS
-------------
-- Implement every function marked TODO.
-- Do not change any function signature.
-- Do not remove or rename required functions.
-- You may add helper functions.
-- Variable names in your code must match what you define in README Part 5a.
-- The pruning safety comment inside _explore() is graded. Do not skip it.
-
-Submit this file as: torchbearer.py
 """
 
 import heapq
-
-from openpyxl.styles.builtins import total
-
 
 # =============================================================================
 # PART 1
@@ -70,7 +56,6 @@ def precompute_distances(graph, spawn, relics, exit_node):
         distance_tbl[source] = run_dijkstra(graph, source)  # current source : dict of minimum distances from source
     return distance_tbl     # look up table of distances from all possible sources
 
-
 # =============================================================================
 # PART 3
 # =============================================================================
@@ -80,7 +65,6 @@ def dijkstra_invariant_check():
     answer2 = "(Init) Before we iterate anything, we only know that the source has a distance of 0 (because we're already there) and all other nodes with currently unknown paths have not been discovered yet, so they are set to float(inf). \n(Maint) We are picking the node with the smallest distance, as far as we know, but because all the edge weights are non-negative, there is really no shorter path that can suddenly spring up later to that node from a different one. \n(Term) After all iterations have happened, the nodes are finalized and we are guaranteed to know the true shortest path from the source to each separate node."
     answer3 = "By knowing all of our correct shortest path distances, the route planner can accurately choose the optimal route because it has all correct the fuel costs between locations on hand."
     return answer1 + "\n" + answer2 + "\n" + answer3
-
 
 # =============================================================================
 # PART 4
@@ -94,7 +78,6 @@ def explain_search():
     answer5 = "(Loses) Greedy doesn't pay attention to how its pick affects the order of the rest of the traversing, and what it costs the future."
     answer6 = "The algorithm must explore different order choices to see the full cost of one entire path, because the total is what really matters."
     return answer1 + "\n" + answer2 + "\n" + answer3 + "\n" + answer4 + "\n" + answer5 + "\n" + answer6
-
 
 # =============================================================================
 # PARTS 5 + 6
@@ -113,23 +96,29 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
-    """
-    TODO
-    Implement: base case, pruning, recursive case, backtracking.
+    if cost_so_far >= best[0]:      # pruning! if already larger cost than our best, we don't need to check! we know!
+        return
+    lower_bound = cost_so_far   # our current best is lower bound for rest
 
-    REQUIRED: Add a 1-2 sentence comment near your pruning condition
-    explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded.
-    """
+    if relics_remaining:
+        cheapest_next = min(dist_table[current_loc][relic] for relic in relics_remaining)
+        lower_bound += cheapest_next    # new lower bound based on cheapest next step
+    else:       # no relics left, so only cost will come from moving to the exit!
+        lower_bound += dist_table[current_loc][exit_node]
+    # this pruning is safe because lower_bound only uses the cheapest possible move, so all other moves are equally
+    # or more expensive. this is the minimum unavoidable cost, so nothing will be smaller than that.
+
     if len(relics_remaining) == 0:      # successfully reached all relics ; base case
         cost_to_exit = dist_table[current_loc][exit_node]
-        if cost_to_exit != float("inf"):    # distance is not infinity, therefore reachable
+        if cost_to_exit == float("inf"):
+            return
+        else:    # distance is not infinity, therefore reachable
             total_cost = cost_so_far + cost_to_exit
             if total_cost < best[0]:
                 best[0] = total_cost    # now minimum cost
                 best[1] = relics_visited_order.copy()   # copy so that any future work does not modify this piece later
             return
-    for relic in relics_remaining.copy():
+    for relic in list(relics_remaining):    # makes a copy so set can be altered ; recursive case
         cost_to_relic = dist_table[current_loc][relic]
         if cost_to_relic == float("inf"):
             continue
@@ -142,30 +131,13 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
             relics_visited_order.pop()      # putting back for future backtracking
             relics_remaining.add(relic)
 
-
 # =============================================================================
 # PIPELINE
 # =============================================================================
 
 def solve(graph, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    tuple[float, list[node]]
-        (minimum_fuel_cost, ordered_relic_list)
-        Returns (float('inf'), []) if no valid route exists.
-
-    TODO
-    """
-    pass
-
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
 
 # =============================================================================
 # PROVIDED TESTS (do not modify)

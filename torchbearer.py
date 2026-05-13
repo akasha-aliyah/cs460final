@@ -28,7 +28,7 @@ def explain_problem():
     answer1 = "A single shortest-path run from S is not enough to solve this because it would only consider the immediate cheapest path, which could ignore the fact that the next step after that could be incredibly expensive. It only compares the immediate step, not the entire sequence of required nodes that end at T."
     answer2 = "After considering all the inter-location costs, the decision to make it how to connect all the costs into one overall lower costs that visits every relic chamber and ends at T."
     answer3 = "We start by knowing the shortest travel costs, but different orders produce different total costs, which is why we need to search over entire orders."
-    return answer1 + " " + answer2 + " " + answer3
+    return answer1 + "\n" + answer2 + "\n" + answer3
 
 # =============================================================================
 # PART 2
@@ -41,7 +41,6 @@ def select_sources(spawn, relics, exit_node):
             sources.append(relic)
     # exit_node is intentionally excluded because we do not need shortest path from exit ; follows with readme
     return sources
-
 
 def run_dijkstra(graph, source):
     distance = {}      # initialize dictionary
@@ -62,7 +61,6 @@ def run_dijkstra(graph, source):
                 heapq.heappush(queue, (new_dist, neighbor))     # schedule for further exploration
     return distance     # list of minimum cost from current source to any other node in the graph
 
-
 def precompute_distances(graph, spawn, relics, exit_node):
     sources = select_sources(spawn, relics, exit_node)      # all possible places to start from
     distance_tbl = {}
@@ -76,16 +74,10 @@ def precompute_distances(graph, spawn, relics, exit_node):
 # =============================================================================
 
 def dijkstra_invariant_check():
-    """
-    Returns
-    -------
-    str
-        Your Part 3 README answers, written as a string.
-        Must match what you wrote in README Part 3.
-
-    TODO
-    """
-    return "TODO"
+    answer1 = "For already finalized nodes, the true shortest path from the source has already been found! It won't change because it has already been proven to be the shortest. If the node has not yet been finalized, then the distances represent the current shortest paths that we have, but that could change and hopefully improve as we work toward finalization."
+    answer2 = "(Init) Before we iterate anything, we only know that the source has a distance of 0 (because we're already there) and all other nodes with currently unknown paths have not been discovered yet, so they are set to float(inf). \n(Maint) We are picking the node with the smallest distance, as far as we know, but because all the edge weights are non-negative, there is really no shorter path that can suddenly spring up later to that node from a different one. \n(Term) After all iterations have happened, the nodes are finalized and we are guaranteed to know the true shortest path from the source to each separate node."
+    answer3 = "By knowing all of our correct shortest path distances, the route planner can accurately choose the optimal route because it has all correct the fuel costs between locations on hand."
+    return answer1 + "\n" + answer2 + "\n" + answer3
 
 
 # =============================================================================
@@ -93,16 +85,13 @@ def dijkstra_invariant_check():
 # =============================================================================
 
 def explain_search():
-    """
-    Returns
-    -------
-    str
-        Your Part 4 README answers, written as a string.
-        Must match what you wrote in README Part 4.
-
-    TODO
-    """
-    return "TODO"
+    answer1 = "(Fail) The greedy algorithm can choose the current closest relic without realizing it forces an incredibly expensive choice later on, because that simply isn't taken into account!"
+    answer2 = "(Counter) Let us say that `S -> B = 1`, `S -> C = 2`, `C -> B = 3`, `B -> C = 100`, `B -> T = 5`, `C -> T = 1`."
+    answer3 = "(Greedy) When we are starting at `S`, our greedy choice picks `B` to be our next node, but after that, the cost to get from `B` to `C` jumps to 100, which throws a wrench in the whole path."
+    answer4 = "(Optimal) The optimal solution picks the overall shortest path, `S -> C -> B -> T = 10`."
+    answer5 = "(Loses) Greedy doesn't pay attention to how its pick affects the order of the rest of the traversing, and what it costs the future."
+    answer6 = "The algorithm must explore different order choices to see the full cost of one entire path, because the total is what really matters."
+    return answer1 + "\n" + answer2 + "\n" + answer3 + "\n" + answer4 + "\n" + answer5 + "\n" + answer6
 
 
 # =============================================================================
@@ -250,7 +239,6 @@ def _run_tests():
     print("  Test 5 passed  explanation functions are non-empty")
 
     print("\nAll provided tests passed.")
-
 
 if __name__ == "__main__":
     _run_tests()

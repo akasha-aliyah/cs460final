@@ -4,11 +4,6 @@
 **Student ID:** 827977287
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
@@ -49,8 +44,6 @@ to search over entire orders.
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** k + 1
 - **Cost per run:** O(m log(n))
 - **Total complexity:** O((k + 1)m log(n))
@@ -61,38 +54,34 @@ for each of the k relics.
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+For already finalized nodes, the true shortest path from the source has already been found! It won't change because it
+has already been proven to be the shortest.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+If the node has not yet been finalized, then the distances represent the current shortest paths that we have, but that
+could change and hopefully improve as we work toward finalization.
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+Before we iterate anything, we only know that the source has a distance of 0 (because we're already there) and all other
+nodes with currently unknown paths have not been discovered yet, so they are set to float("inf").
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+We are picking the node with the smallest distance, as far as we know, but because all the edge weights are non-negative,
+there is really no shorter path that can suddenly spring up later to that node from a different one.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+After all iterations have happened, the nodes are finalized and we are guaranteed to know the true shortest path from
+the source to each separate node.
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+By knowing all of our correct shortest path distances, the route planner can accurately choose the optimal route because
+it has all correct the fuel costs between locations on hand.
 
 ---
 
@@ -100,20 +89,20 @@ _Your answer here._
 
 ### Why Greedy Fails
 
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
-
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** The greedy algorithm can choose the current closest relic without realizing it forces an
+incredibly expensive choice later on, because that simply isn't taken into account!
+- **Counter-example setup:** Let us say that `S -> B = 1`, `S -> C = 2`, `C -> B = 3`, `B -> C = 100`, `B -> T = 5`, `C 
+-> T = 1`.
+- **What greedy picks:** When we are starting at `S`, our greedy choice picks `B` to be our next node, but after that, 
+the cost to get from `B` to `C` jumps to 100, which throws a wrench in the whole path. 
+- **What optimal picks:** The optimal solution picks the overall shortest path, `S -> C -> B -> T = 10`.
+- **Why greedy loses:** Greedy doesn't pay attention to how its pick affects the order of the rest of the traversing,
+and what it costs the future.
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
-- _Your answer here._
+The algorithm must explore different order choices to see the full cost of one entire path, because the total is what
+really matters.
 
 ---
 

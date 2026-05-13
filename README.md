@@ -110,33 +110,26 @@ really matters.
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
-| Component | Variable name in code | Data type | Description |
-|---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Component | Variable name in code | Data type  | Description                                                                                                   |
+|---|-----------------------|------------|---------------------------------------------------------------------------------------------------------------|
+| Current location | current_loc           | node   | The current node we are at represents the location that the (partial) path we are creating currently ends at. |
+| Relics already collected | relics_visited_order  | list[node] | The relics that we have collected thus far on our current path, in order.                                     |
+| Fuel cost so far | cost_so_far           | float      | The total amount of fuel used in the current (partial) path.                                                  |
 
 ### Part 5b: Data Structure for Visited Relics
 
-> Fill in the table.
-
-| Property | Your answer |
-|---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Property | Your answer                                                                                                  |
+|---|--------------------------------------------------------------------------------------------------------------|
+| Data structure chosen | set                                                                                                          |
+| Operation: check if relic already collected | Time complexity: O(1)                                                                                        |
+| Operation: mark a relic as collected | Time complexity:   O(1)                                                                                      |
+| Operation: unmark a relic (backtrack) | Time complexity:  O(1)                                                                                       |
+| Why this structure fits | A set is pretty fast when it comes to adding, removing, and checking what's inside. Useful for backtracking. |
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** k!
+- **Why:** It is possible that all different orders of visiting relics (the permutations) may need to be visited.
 
 ---
 

@@ -19,6 +19,8 @@ Submit this file as: torchbearer.py
 
 import heapq
 
+from openpyxl.styles.builtins import total
+
 
 # =============================================================================
 # PART 1
@@ -99,50 +101,19 @@ def explain_search():
 # =============================================================================
 
 def find_optimal_route(dist_table, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-        Output of precompute_distances.
-    spawn : node
-    relics : list[node]
-        Every node in this list must be visited at least once.
-    exit_node : node
-        The route must end here.
+    current_loc = spawn     # current location must start at origin
+    relics_remaining = set(relics)  # all possible relics to visit
+    relics_visited_order = []     # empty list
+    cost_so_far = 0          # haven't gone anywhere yet!
+    best = [float("inf"), []]   # going to store the best cost as float and best order as list of nodes
 
-    Returns
-    -------
-    tuple[float, list[node]]
-        (minimum_fuel_cost, ordered_relic_list)
-        Returns (float('inf'), []) if no valid route exists.
+    _explore(dist_table, current_loc, relics_remaining, relics_visited_order, cost_so_far, exit_node, best)
 
-    TODO
-    """
-    pass
-
+    return tuple(best)     # says to specifically return a tuple
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
     """
-    Recursive helper for find_optimal_route.
-
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-    current_loc : node
-    relics_remaining : collection
-        Your chosen data structure from README Part 5b.
-    relics_visited_order : list[node]
-    cost_so_far : float
-    exit_node : node
-    best : list
-        Mutable container for the best solution found so far.
-
-    Returns
-    -------
-    None
-        Updates best in place.
-
     TODO
     Implement: base case, pruning, recursive case, backtracking.
 
@@ -150,7 +121,26 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    if len(relics_remaining) == 0:      # successfully reached all relics ; base case
+        cost_to_exit = dist_table[current_loc][exit_node]
+        if cost_to_exit != float("inf"):    # distance is not infinity, therefore reachable
+            total_cost = cost_so_far + cost_to_exit
+            if total_cost < best[0]:
+                best[0] = total_cost    # now minimum cost
+                best[1] = relics_visited_order.copy()   # copy so that any future work does not modify this piece later
+            return
+    for relic in relics_remaining.copy():
+        cost_to_relic = dist_table[current_loc][relic]
+        if cost_to_relic == float("inf"):
+            continue
+        else:
+            relics_remaining.remove(relic)
+            relics_visited_order.append(relic)
+
+            _explore(dist_table, relic, relics_remaining, relics_visited_order, cost_so_far + cost_to_relic, exit_node, best)
+
+            relics_visited_order.pop()      # putting back for future backtracking
+            relics_remaining.add(relic)
 
 
 # =============================================================================
